@@ -7,3 +7,4 @@ Particle Swarm Optimization (PSO) adalah metode komputasi yang mengoptimalkan ma
 - [pandas](https://pypi.org/project/pandas/)
 - [numpy](https://pypi.org/project/numpy/)
 - [sklearn](https://pypi.org/project/scikit-learn/)
+- [imageio](https://pypi.org/project/imageio/)
