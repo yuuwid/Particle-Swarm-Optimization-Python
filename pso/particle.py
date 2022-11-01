@@ -42,7 +42,7 @@ class Particle:
             self.position_particle_i)
 
         # Cek untuk melihat apakah posisi saat ini adalah individu terbaik
-        if (self.err_particle_i < self.err_best_particle_i) or (self.err_best_particle_i == -1):
+        if ((self.err_particle_i < self.err_best_particle_i) or (self.err_best_particle_i == -1)):
             self.pos_best_particle_i = copy.deepcopy(self.position_particle_i)
             self.err_best_particle_i = self.err_particle_i
 

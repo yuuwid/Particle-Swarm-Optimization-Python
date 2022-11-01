@@ -1,9 +1,14 @@
+import os
 import time
 import copy
 
 from pso.particle import Particle
 from pso.base_model import set_model
 from sklearn.metrics import mean_squared_error, mean_absolute_error
+import matplotlib.pyplot as plt
+from matplotlib import animation
+import numpy as np
+import imageio
 
 
 class PSO:
@@ -136,11 +141,14 @@ class PSO:
         init = time.time()
         i = 0
 
+        self.particle_swarm = []
+
         # Start optimization loop
         while i < self.max_iter:
             if verbose:
                 print('iter_{}'.format(i))
 
+            temp_p_swarn = []
             # Siklus partikel kawanan dalam gerombolan dan Evaluasi Data
             for j in range(0, self.n_population):
                 self.swarm[j].evaluate(self.model)
@@ -150,7 +158,7 @@ class PSO:
                     self.swarm[j].print_particle()
 
                 # Tentukan apakah partikel saat ini adalah yang terbaik (secara global)
-                if (self.swarm[j].err_particle_i < self.err_best_g) or (self.err_best_g == -1):
+                if ((self.swarm[j].err_particle_i < self.err_best_g) or (self.err_best_g == -1)):
                     self.pos_best_g = copy.deepcopy(
                         self.swarm[j].position_particle_i)
                     self.err_best_g = self.swarm[j].err_particle_i
@@ -162,6 +170,11 @@ class PSO:
                 self.swarm[j].update_velocity(
                     self.pos_best_g, self.c1, self.c2, self.w)
                 self.swarm[j].update_position(list(self.boundaries.values()))
+
+                temp_p_swarn.append(copy.deepcopy(
+                    self.swarm[j]))
+
+            self.particle_swarm.append(copy.deepcopy(temp_p_swarn))
 
             if verbose:
                 print('best loss: {}'.format(self.err_best_g))
@@ -176,6 +189,9 @@ class PSO:
         self.best_params_ = self.format_output()
 
         return self.model_best_g
+
+    def _optimal_swarm(self):
+        pass
 
     def format_output(self):
         results = {}

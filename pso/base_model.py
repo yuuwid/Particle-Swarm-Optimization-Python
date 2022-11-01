@@ -1,8 +1,6 @@
 import numpy as np
 
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.svm import SVR, SVC
-
 
 # Base class of models
 class _Model:
